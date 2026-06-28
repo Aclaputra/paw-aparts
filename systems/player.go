@@ -1,7 +1,6 @@
 package systems
 
 import (
-	"fmt"
 	"image"
 	"math"
 
@@ -23,7 +22,7 @@ func UpdatePlayer(ecs *ecs.ECS) {
 
 	friction := 0.5
 	accel := 0.5 + friction
-	maxSpeed := 4.0
+	maxSpeed := 2.0
 	jumpSpd := 10.0
 	gravity := 0.75
 
@@ -102,8 +101,6 @@ func UpdatePlayer(ecs *ecs.ECS) {
 	dx := player.SpeedX
 
 	if check := playerObject.Check(player.SpeedX, 0, "solid"); check != nil {
-		fmt.Println("Solid!!!")
-
 		dx = check.ContactWithCell(check.Cells[0]).X
 		player.SpeedX = 0
 
@@ -126,7 +123,7 @@ func UpdatePlayer(ecs *ecs.ECS) {
 		checkDistance++
 	}
 
-	if check := playerObject.Check(0, checkDistance, "solid", "platform", "ramp"); check != nil {
+	if check := playerObject.Check(0, checkDistance, "solid", "platform"); check != nil {
 		if platforms := check.ObjectsByTags("platform"); len(platforms) > 0 {
 
 			platform := platforms[0]

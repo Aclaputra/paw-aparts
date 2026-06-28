@@ -31,11 +31,12 @@ type NPCData struct {
 }
 
 type DialogueData struct {
-	Active       bool   // whether dialogue box is visible
-	Text         string // full text to show
-	CurrentIndex int    // typing effect index
-	Done         bool   // finished typing
-	Loc          math.Vec2
+	Active             bool   // whether dialogue box is visible
+	Text               string // full text to show
+	CurrentIndex       int    // typing effect index
+	Done               bool   // finished typing
+	Loc                math.Vec2
+	NextSceneTriggered bool
 }
 
 type Animation struct {

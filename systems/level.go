@@ -17,3 +17,11 @@ func DrawPlatform(ecs *ecs.ECS, screen *ebiten.Image) {
 		ebitenutil.DrawRect(screen, o.Position.X, o.Position.Y, o.Size.X, o.Size.Y, drawColor)
 	}
 }
+
+func DrawWall(ecs *ecs.ECS, screen *ebiten.Image) {
+	for e := range tags.Wall.Iter(ecs.World) {
+		o := collision.GetObject(e)
+		drawColor := color.RGBA{20, 60, 20, 255}
+		ebitenutil.DrawRect(screen, o.Position.X, o.Position.Y, o.Size.X, o.Size.Y, drawColor)
+	}
+}
