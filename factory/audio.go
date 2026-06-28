@@ -15,14 +15,13 @@ const sampleRate = 44100
 func InitMusic(ecs *ecs.ECS, oggBytes []byte) {
 	world := ecs.World
 
-	// 1. Get or create the context
 	ctx := audio.CurrentContext()
 	if ctx == nil {
-		ctx = audio.NewContext(44100)
+		ctx = audio.NewContext(sampleRate)
 	}
 
-	// 2. Decode and create the player normally
-	stream, err := vorbis.DecodeWithSampleRate(44100, bytes.NewReader(oggBytes))
+	// Decode and create the player normally
+	stream, err := vorbis.DecodeWithSampleRate(sampleRate, bytes.NewReader(oggBytes))
 	if err != nil {
 		log.Fatalf("failed to decode ogg: %v", err)
 	}
@@ -33,7 +32,7 @@ func InitMusic(ecs *ecs.ECS, oggBytes []byte) {
 		log.Fatalf("failed to create audio player: %v", err)
 	}
 
-	// 3. Re-save to your Donburi world
+	// Re-save Donburi world
 	entry := world.Entry(world.Create(components.Music))
 	components.Music.SetValue(entry, components.MusicData{
 		Background: player,

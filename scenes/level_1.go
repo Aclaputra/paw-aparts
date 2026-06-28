@@ -70,7 +70,7 @@ func (l1 *Level1Scene) Update(g *game.Game) {
 		if menu.NextSceneTriggered {
 			menu.NextSceneTriggered = false
 
-			systems.DisposeMusic(l1.ecs)
+			// systems.DisposeMusic(l1.ecs)
 			g.ChangeScene(NewResultMenuScene())
 		}
 	}
