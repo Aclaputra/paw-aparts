@@ -27,9 +27,9 @@ func createECSLevel2() *ecs.ECS {
 	ecs.AddSystem(systems.UpdateNPC)
 	ecs.AddSystem(systems.UpdatePlayer)
 
+	ecs.AddRenderer(layers.Default, systems.DrawWall)
 	ecs.AddRenderer(layers.Default, systems.DrawDialogue)
 	ecs.AddRenderer(layers.Default, systems.DrawNPC)
-	ecs.AddRenderer(layers.Default, systems.DrawWall)
 	ecs.AddRenderer(layers.Default, systems.DrawPlatform)
 	ecs.AddRenderer(layers.Default, systems.DrawPlayer)
 

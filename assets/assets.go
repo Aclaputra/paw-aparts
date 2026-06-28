@@ -12,6 +12,10 @@ import (
 var (
 	//go:embed background.png
 	Background_Png []byte
+	//go:embed bg_game.png
+	BGGame_Png []byte
+	//go:embed bg_game_dark.png
+	BGGameDark_Png []byte
 	//go:embed fonts/excel.ttf
 	ExcelFont []byte
 	//go:embed cat/IDLE.png
