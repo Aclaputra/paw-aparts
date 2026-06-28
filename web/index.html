@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Paw Aparts</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: #0b0d14;
+    overflow: hidden;
+    /* keep taps from selecting text / showing callouts on mobile */
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  canvas {
+    display: block;
+    /* Ebiten sizes the canvas; this just keeps it centered & crisp */
+    image-rendering: auto;
+  }
+  #loading {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4a5159;
+    font-family: system-ui, sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.1em;
+  }
+</style>
+</head>
+<body>
+<div id="loading">connecting…</div>
+<script src="wasm_exec.js"></script>
+<script>
+  (async () => {
+    const go = new Go();
+    try {
+      const result = await WebAssembly.instantiateStreaming(
+        fetch("game.wasm"),
+        go.importObject
+      );
+      document.getElementById("loading").remove();
+      go.run(result.instance);
+    } catch (err) {
+      document.getElementById("loading").textContent = "failed to load";
+      console.error(err);
+    }
+  })();
+</script>
+</body>
+</html>

@@ -1,7 +1,6 @@
 package scenes
 
 import (
-	"fmt"
 	"image/color"
 
 	"github.com/aclaputra/paw-aparts/game"
@@ -20,12 +19,10 @@ func NewLevel1Scene() *Level1Scene {
 }
 
 func (l1 *Level1Scene) Update(g *game.Game) {
-	fmt.Println("Youre on level 1")
 	l1.ecs.Update()
 }
 
 func (l1 *Level1Scene) Draw(screen *ebiten.Image) {
-	fmt.Println("Youre on level 1")
 	screen.Fill(color.RGBA{60, 60, 100, 255})
 	l1.ecs.Draw(screen)
 }
