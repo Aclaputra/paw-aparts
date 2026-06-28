@@ -3,6 +3,7 @@ package scenes
 import (
 	"image/color"
 
+	"github.com/aclaputra/paw-aparts/assets"
 	"github.com/aclaputra/paw-aparts/collision"
 	"github.com/aclaputra/paw-aparts/components"
 	"github.com/aclaputra/paw-aparts/config"
@@ -20,6 +21,7 @@ import (
 func createECSLevel1() *ecs.ECS {
 	ecs := ecs.NewECS(donburi.NewWorld())
 
+	ecs.AddSystem(systems.UpdateMusic)
 	ecs.AddSystem(systems.UpdateDialogue)
 	ecs.AddSystem(systems.UpdateNPC)
 	ecs.AddSystem(systems.UpdatePlayer)
@@ -33,6 +35,7 @@ func createECSLevel1() *ecs.ECS {
 	gw, gh := float64(config.C.Width), float64(config.C.Height)
 	space := factory.CreateSpace(ecs)
 
+	factory.InitMusic(ecs, assets.MusicGame)
 	factory.CreateDialogue(ecs)
 	collision.Add(space,
 		factory.CreateNPC(ecs, &math.Vec2{
@@ -67,6 +70,7 @@ func (l1 *Level1Scene) Update(g *game.Game) {
 		if menu.NextSceneTriggered {
 			menu.NextSceneTriggered = false
 
+			systems.DisposeMusic(l1.ecs)
 			g.ChangeScene(NewResultMenuScene())
 		}
 	}

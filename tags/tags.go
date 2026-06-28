@@ -8,4 +8,5 @@ var (
 	Wall     = donburi.NewTag().SetName("wall")
 	NPC      = donburi.NewTag().SetName("npc")
 	Dialogue = donburi.NewTag().SetName("dialogue")
+	Music    = donburi.NewTag().SetName("music")
 )

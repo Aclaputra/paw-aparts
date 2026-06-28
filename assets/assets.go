@@ -24,6 +24,12 @@ var (
 	RunCat_Png []byte
 	//go:embed cat/RUNNING_JUMP.png
 	RunJumpCat_Png []byte
+	//go:embed music/game.ogg
+	MusicGame []byte
+	//go:embed music/main_menu.ogg
+	MusicMainMenu []byte
+	//go:embed music/result_menu.ogg
+	MusicResultMenu []byte
 )
 
 // GetEbitenImage converts embedded []byte into *ebiten.Image

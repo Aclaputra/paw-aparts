@@ -20,9 +20,11 @@ import (
 func createECSMainMenu() *ecs.ECS {
 	ecs := ecs.NewECS(donburi.NewWorld())
 
+	ecs.AddSystem(systems.UpdateMusic)
 	ecs.AddSystem(systems.UpdateMenu)
 	ecs.AddRenderer(layers.Default, systems.DrawMenu)
 
+	factory.InitMusic(ecs, assets.MusicMainMenu)
 	factory.CreateMenu(ecs, components.MenuData{
 		BackgroundImage: assets.GetEbitenImage(assets.Background_Png),
 		Texts: []components.TextData{
@@ -56,6 +58,7 @@ func (m *MainMenuScene) Update(g *game.Game) {
 		if menu.NextSceneTriggered {
 			menu.NextSceneTriggered = false
 
+			systems.DisposeMusic(m.ecs)
 			g.ChangeScene(NewLevel1Scene())
 		}
 	}
