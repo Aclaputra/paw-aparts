@@ -2,6 +2,7 @@ package scenes
 
 import (
 	"image/color"
+	"time"
 
 	"github.com/aclaputra/paw-aparts/assets"
 	"github.com/aclaputra/paw-aparts/collision"
@@ -53,7 +54,9 @@ func createECSLevel1() *ecs.ECS {
 }
 
 type Level1Scene struct {
-	ecs *ecs.ECS
+	ecs        *ecs.ECS
+	lastUpdate time.Time
+	elapsed    float64
 }
 
 func NewLevel1Scene() *Level1Scene {
@@ -63,6 +66,20 @@ func NewLevel1Scene() *Level1Scene {
 }
 
 func (l1 *Level1Scene) Update(g *game.Game) {
+	if l1.lastUpdate.IsZero() {
+		l1.lastUpdate = time.Now()
+	}
+
+	now := time.Now()
+	dt := now.Sub(l1.lastUpdate).Seconds()
+	l1.lastUpdate = now
+
+	l1.elapsed += dt
+
+	// if l1.elapsed >= 1 {
+	// 	l1.elapsed = 0
+	// }
+
 	l1.ecs.Update()
 
 	if ent, ok := components.Dialogue.First(l1.ecs.World); ok {
@@ -70,8 +87,8 @@ func (l1 *Level1Scene) Update(g *game.Game) {
 		if menu.NextSceneTriggered {
 			menu.NextSceneTriggered = false
 
-			// systems.DisposeMusic(l1.ecs)
-			g.ChangeScene(NewResultMenuScene())
+			systems.DisposeMusic(l1.ecs)
+			g.ChangeScene(NewResultMenuScene("Level 1", l1.elapsed, "Level 2"))
 		}
 	}
 }
