@@ -14,6 +14,16 @@ var (
 	Background_Png []byte
 	//go:embed fonts/excel.ttf
 	ExcelFont []byte
+	//go:embed cat/IDLE.png
+	IdleCat_Png []byte
+	//go:embed cat/JUMP.png
+	JumpCat_Png []byte
+	//go:embed cat/WALK.png
+	WalkCat_Png []byte
+	//go:embed cat/RUN.png
+	RunCat_Png []byte
+	//go:embed cat/RUNNING_JUMP.png
+	RunJumpCat_Png []byte
 )
 
 // GetEbitenImage converts embedded []byte into *ebiten.Image

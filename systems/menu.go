@@ -26,14 +26,10 @@ func UpdateMenu(ecs *ecs.ECS) {
 			if inpututil.IsKeyJustPressed(ebiten.KeyEnter) ||
 				inpututil.IsKeyJustPressed(ebiten.KeySpace) ||
 				inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
-				log.Println("Any key pressed → continue")
-				// next scene or close menu
 				menu.NextSceneTriggered = true
 			}
 		case components.PRESS_ENTER_TO_CONTINUE:
 			if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
-				log.Println("Enter pressed → continue")
-				// next scene or close menu
 				menu.NextSceneTriggered = true
 			}
 		default:
