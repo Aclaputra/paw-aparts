@@ -76,10 +76,6 @@ func (l1 *Level1Scene) Update(g *game.Game) {
 
 	l1.elapsed += dt
 
-	// if l1.elapsed >= 1 {
-	// 	l1.elapsed = 0
-	// }
-
 	l1.ecs.Update()
 
 	if ent, ok := components.Dialogue.First(l1.ecs.World); ok {

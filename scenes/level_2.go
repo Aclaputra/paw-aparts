@@ -40,14 +40,14 @@ func createECSLevel2() *ecs.ECS {
 	factory.CreateDialogue(ecs)
 	collision.Add(space,
 		factory.CreateNPC(ecs, &math.Vec2{
-			X: (float64(config.C.Width) / 2) - (80 + 64),
-			Y: float64(config.C.Height) - (128 * 3) + 16,
+			X: gw - 128,
+			Y: 64 * 1.8,
 		}, "cat"),
-		factory.CreatePlayer(ecs, &math.Vec2{X: gw / 2, Y: gh / 2}),
-		factory.CreateWall(ecs, resolv.NewObject((gw/2)-128, gh-(256*1.2), 32, 130*2, "solid")),
-		factory.CreatePlatform(ecs, resolv.NewObject((gw/2), gh-128, 128, 16, "platform")),
-		factory.CreatePlatform(ecs, resolv.NewObject((gw/2)-128, gh-128+64, 128, 16, "platform")),
-		factory.CreatePlatform(ecs, resolv.NewObject((gw/2)-128, gh-(64*5), 128, 16, "platform")),
+		factory.CreatePlayer(ecs, &math.Vec2{X: (float64(config.C.Width) / 2) + 80, Y: float64(config.C.Height) - (128 * 2) + 64}),
+		factory.CreateWall(ecs, resolv.NewObject((gw/2)-(128*2), gh-(256*1.2), 32, 100*2, "solid")),
+		factory.CreateWall(ecs, resolv.NewObject(gw-(32), gh, 32, 130, "solid")),
+		factory.CreatePlatform(ecs, resolv.NewObject(0, gh-16, gw, 16, "platform")),
+		factory.CreatePlatform(ecs, resolv.NewObject(64, 164, 128*4, 16, "platform")),
 	)
 
 	return ecs
