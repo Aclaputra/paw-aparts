@@ -42,11 +42,11 @@ func createECSResultMenuScene(prevLevelName string, timeTaken float64, nextLevel
 
 	textEnd := []components.TextData{
 		{
-			Loc: &math.Vec2{X: float64((config.C.Width)/2) - 125, Y: 100},
+			Loc: &math.Vec2{X: float64((config.C.Width)/2) - 100, Y: 80},
 			Txt: "You Won! Congrats!!" + " - " + prevLevelName,
 		},
 		{
-			Loc: &math.Vec2{X: float64((config.C.Width)/2) - 125, Y: 150},
+			Loc: &math.Vec2{X: float64((config.C.Width)/2) - 100, Y: 105},
 			Txt: "Thanks for Playing PAW APARTS :P",
 		},
 		{
@@ -55,15 +55,19 @@ func createECSResultMenuScene(prevLevelName string, timeTaken float64, nextLevel
 		},
 	}
 
+	var bgImage *ebiten.Image
+
 	if prevLevelName != "End" && nextLevelName != "End" {
 		texts = textList
+		bgImage = assets.GetEbitenImage(assets.Background_Png)
 	} else {
 		texts = textEnd
+		bgImage = assets.GetEbitenImage(assets.SplashLogo_Png)
 	}
 
 	factory.InitMusic(ecs, assets.MusicMainMenu)
 	factory.CreateMenu(ecs, components.MenuData{
-		BackgroundImage:    assets.GetEbitenImage(assets.Background_Png),
+		BackgroundImage:    bgImage,
 		Texts:              texts,
 		Actions:            []int{components.PRESS_ANY_TO_CONTINUE},
 		NextSceneTriggered: false,

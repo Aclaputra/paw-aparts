@@ -10,6 +10,8 @@ import (
 )
 
 var (
+	//go:embed splash_logo.png
+	SplashLogo_Png []byte
 	//go:embed background.png
 	Background_Png []byte
 	//go:embed bg_game.png
